@@ -1,4 +1,4 @@
-# SQL Agent API
+# QueryDB: SQL Agent API
 
 A natural-language-to-SQL agent, served as a FastAPI HTTP API and orchestrated with [LangGraph](https://github.com/langchain-ai/langgraph). Ask a question in plain English, get back an answer grounded in your database — with schema-aware query generation, hallucination checks, and a read-only execution guard.
 
@@ -8,6 +8,8 @@ POST /chat
 
 → { "response": "The top 5 best-selling artists were ...", "sql_query": "SELECT ..." }
 ```
+
+> **Don't want to self-host?** [QueryDB](https://querydb.in) is the hosted version of this agent — connect your PostgreSQL database, bring your own API key, and start chatting with your data in under two minutes. Free to use.
 
 ## Features
 
@@ -20,6 +22,21 @@ POST /chat
 - **Automatic retries** — on a bad query or a DB error, the agent regenerates the query (up to `MAX_RETRIES`) before giving up gracefully.
 - **Connection & schema caching** — engines, `SQLDatabase` wrappers, and table lists are cached per connection string to avoid repeated introspection.
 - **Usage tracking** — every response includes prompt/completion/total token counts, API call count, and duration.
+
+## Hosted Version — QueryDB
+
+This repository is the open-source AI layer that powers **[QueryDB](https://querydb.in)** — a free, hosted chat interface for your PostgreSQL database.
+
+If you want to use this agent without running your own server:
+
+- 🌐 Go to [querydb.in](https://querydb.in)
+- 🔌 Paste your PostgreSQL connection string
+- 🔑 Add your LLM API key (OpenAI, Anthropic, or any compatible provider)
+- 💬 Start asking questions in plain English
+
+Your data never passes through QueryDB's servers — the agent runs queries directly against your database using the API key you provide. QueryDB currently supports **PostgreSQL**.
+
+If you'd rather self-host this AI layer yourself (for other databases, custom models, or full control), follow the quickstart below.
 
 ## Architecture
 
